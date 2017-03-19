@@ -1,0 +1,12 @@
+sensor:
+  - platform: mqtt
+    state_topic: "owntracks/bastshoes/MeizuPro5"
+    name: "Meizu Battery"
+    unit_of_measurement: "%"
+    value_template: "{{ value_json.batt }}"
+
+camera:
+  - platform: generic
+    name: "Andrey location"
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.bastshoes_meizupro5.attributes.latitude }},{{ states.device_tracker.bastshoes_meizupro5.attributes.longitude }}&zoom=18&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:A%7C{{ states.device_tracker.bastshoes_meizupro5.attributes.latitude }},{{ states.device_tracker.bastshoes_meizupro5.attributes.longitude }}
+    limit_refetch_to_url_change: true

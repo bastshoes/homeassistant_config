@@ -1,0 +1,18 @@
+default_view:
+  view: yes
+  entities:
+    - device_tracker.bastshoes_meizupro5
+
+andrey:
+  name: Andrey
+  entities:
+    - sensor.meizu_battery
+    - device_tracker.bastshoes_meizupro5
+
+Andrey_tab:
+  view: yes
+  name: Andrey
+  icon: mdi:account
+  entities:
+    - group.andrey 
+    - camera.andrey_location

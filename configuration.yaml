@@ -5,12 +5,15 @@ homeassistant:
   latitude: !secret home_lat
   longitude: !secret home_long
   # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 166.4
+  elevation: 166
   # metric for Metric, imperial for Imperial
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Moscow
-
+  # Packages
+  packages: !include_dir_named packages
+  # Customization
+  customize: !include_dir_merge_named customize
 # Show links to resources in log and frontend
 # introduction:
 
@@ -22,18 +25,31 @@ config:
 
 http:
   # Uncomment this to add a password (recommended!)
-  api_password: !secret http_password
   # Uncomment this if you are using SSL or running in Docker etc
   # base_url: example.duckdns.org:8123
+  api_password: !secret http_password
+  cors_allowed_origins:
+    - https://google.com
+    - https://home-assistant.io
+    - https://scontent.xx.fbcdn.net
+    - https://maps.googleapis.com
+    - https://materialdesignicons.com
+  ip_ban_enabled: True
+  login_attempts_threshold: 5
 
 # Checks for available updates
 updater:
 
 # Discover some devices automatically
-discovery:
+# discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
+
+# Recorder to store in MySQL
+recorder: 
+  db_url: !secret sql_string
+  purge_days: 10
 
 # Enables support for tracking state changes over time.
 history:
@@ -43,6 +59,25 @@ logbook:
 
 # Track the sun
 sun:
+
+# Mosquitto
+mqtt:
+  broker: 127.0.0.1
+  port: 1883
+  client_id: hass
+  keepalive: 60
+  username: !secret mqtt_usr
+  password: !secret mqtt_pass
+  protocol: 3.1 
+
+# Device tracker
+device_tracker: !include_dir_merge_list device_tracker
+
+# Zones
+zone: !include_dir_merge_list zones
+
+#Groups
+group: !include groups.yaml
 
 # Text to speech
 # tts:
