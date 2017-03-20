@@ -1,0 +1,82 @@
+sensor.dsn7d:
+  friendly_name: Next 7 days
+  icon: mdi:calendar
+
+sensor.dsn24h:
+  friendly_name: Next 24 hours
+  icon: mdi:calendar-clock
+
+sensor.dark_sky_precip_probability:
+  friendly_name: Precip Probability
+  icon: mdi:weather-snowy-rainy
+
+sensor.pws_station_id:
+  friendly_name: PWS Station ID
+  icon: mdi:fingerprint
+sensor.pws_location:
+  friendly_name: Location
+  icon: mdi:earth
+sensor.pws_elevation:
+  friendly_name: Elev. above sea level
+  icon: mdi:upload
+sensor.pws_observation_time:
+  friendly_name: Observation Time
+  icon: mdi:calendar-clock 
+sensor.pws_uv:
+  friendly_name: UV Level
+  icon: mdi:sunglasses
+sensor.pws_relative_humidity:
+  friendly_name: Relative Humidity
+  icon: mdi:water-percent
+sensor.pws_wind_dir:
+  friendly_name: Wind Direction
+  icon: mdi:compass
+sensor.pws_dewpoint_c:
+   friendly_name: Dew Point
+   icon: mdi:oil-temperature
+sensor.pws_temp_c:
+  friendly_name: Temperature
+  icon: mdi:thermometer
+sensor.pws_feelslike_c:
+  friendly_name: Feels Like
+  icon: mdi:account-alert
+sensor.pws_heat_index_c:
+  friendly_name: Heat Index
+  icon: mdi:thermometer-lines
+sensor.pws_precip_1hr_metric:
+  friendly_name: Precip Last Hour
+  icon: mdi:cup-water
+sensor.pws_precip_today_metric:
+  friendly_name: Precip Today
+  icon: mdi:water
+sensor.pws_pressure_mb:
+  friendly_name: Barometric Pressure
+  icon: mdi:nature
+sensor.pws_visibility_km:
+  friendly_name: Visibility
+  icon: mdi:weather-fog
+sensor.pws_wind_kph:
+  friendly_name: Wind Speed
+  icon: mdi:weather-windy
+sensor.pws_wind_gust_kph:
+  friendly_name: Wind Gust Speed
+  icon: mdi:speedometer
+sensor.pws_alerts:
+  friendly_name: Alerts
+  icon: mdi:alert
+sensor.pws_pressure_trend:
+  friendly_name: Pressure trend
+  icon: mdi:chart-line
+sensor.pws_solarradiation:
+  friendly_name: Solar Radiation
+  icon: mdi:radioactive
+sensor.pws_weather:
+  friendly_name: Weather
+
+group.darksky_card:
+  order: 2
+group.wunderground_card:
+  order: 1
+group.outside_card:
+  order: 2
+

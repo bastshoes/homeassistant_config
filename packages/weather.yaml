@@ -1,0 +1,62 @@
+##########################################################################
+#                            DarkSky                                     #
+##########################################################################
+
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_key
+    update_interval: 
+      seconds: 90
+    monitored_conditions:
+      - hourly_summary
+      - daily_summary
+      - precip_probability
+
+  - platform: template
+    sensors:
+      dsn24h:
+        friendly_name: Next 24 hours
+        value_template: >
+                        {% if states.sensor.dark_sky_hourly_summary.state %}
+                        {{states('sensor.dark_sky_hourly_summary')}}
+                        {% endif %}
+              
+      dsn7d:
+        friendly_name: Next 7 days
+        value_template: >
+                        {% if states.sensor.dark_sky_daily_summary.state %}
+                        {{states('sensor.dark_sky_daily_summary')}}
+                        {% endif %}  
+
+#########################################################################################
+#                               Weather Underground                                     #
+#########################################################################################
+        
+
+  - platform: wunderground
+    api_key: !secret wu_key
+    lang: RU
+    pws_id: IPAVLOSL5
+    monitored_conditions:
+      - alerts
+      - dewpoint_c
+      - feelslike_c
+      - heat_index_c
+      - elevation
+      - location
+      - observation_time
+      - precip_1hr_metric
+      - precip_today_metric
+      - pressure_mb
+      - pressure_trend
+      - relative_humidity
+      - station_id
+      - solarradiation
+      - temp_c
+      - UV
+      - visibility_km
+      - weather
+      - wind_dir
+      - wind_gust_kph
+      - wind_kph
+            

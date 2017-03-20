@@ -1,18 +1,73 @@
+outside_card:
+  name: Outside
+  entities:
+    - sensor.pws_weather
+    - sensor.pws_temp_c
+    - sensor.pws_feelslike_c
+    - sensor.pws_relative_humidity
+    - sensor.pws_wind_dir
+    - sensor.pws_wind_kph
+    - sensor.pws_pressure_mb
+    - sensor.dark_sky_precip_probability
+    - sensor.dsn24h
+    - sensor.dsn7d
+
 default_view:
   view: yes
   entities:
     - device_tracker.bastshoes_meizupro5
+    - group.outside_card
 
-andrey:
+andrey_card:
   name: Andrey
   entities:
-    - sensor.meizu_battery
     - device_tracker.bastshoes_meizupro5
+    - sensor.meizu_battery
 
-Andrey_tab:
+andrey_view:
   view: yes
   name: Andrey
   icon: mdi:account
   entities:
-    - group.andrey 
+    - group.andrey_card 
     - camera.andrey_location
+
+darksky_card:
+  name: Forecast
+  entities:
+#    - sensor.dark_sky_precip_probability
+    - sensor.dsn24h
+    - sensor.dsn7d
+
+wunderground_card:
+  name: Weather
+  entities:
+    - sensor.pws_station_id
+    - sensor.pws_location
+    - sensor.pws_elevation
+    - sensor.pws_weather
+    - sensor.pws_temp_c
+    - sensor.pws_feelslike_c
+    - sensor.pws_dewpoint_c
+    - sensor.pws_relative_humidity
+    - sensor.pws_wind_kph
+    - sensor.pws_wind_dir
+    - sensor.pws_wind_gust_kph
+    - sensor.pws_pressure_mb
+    - sensor.pws_pressure_trend
+    - sensor.pws_visibility_km
+    - sensor.pws_precip_1hr_metric
+    - sensor.pws_precip_today_metric
+    - sensor.pws_solarradiation
+    - sensor.pws_UV
+    - sensor.pws_heat_index_c
+    - sensor.pws_alerts
+    - sensor.pws_observation_time
+
+weather_view:
+  view: yes
+  name: Weather
+  icon: mdi:weather-snowy-rainy
+  entities:
+    - group.wunderground_card
+    - group.darksky_card
