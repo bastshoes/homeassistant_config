@@ -1,0 +1,18 @@
+
+- cal_id: lapatoc.home@gmail.com
+  entities:
+  - device_id: house_hold
+    name: Upcoming event
+    track: true
+
+- cal_id: '#contacts@group.v.calendar.google.com'
+  entities:
+  - device_id: contacts_birthdays
+    name: Upcoming Birthday
+    track: true
+
+- cal_id: ru.russian#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: national_holidays
+    name: Upcoming holidays
+    track: true

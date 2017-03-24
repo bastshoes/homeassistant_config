@@ -1,0 +1,29 @@
+sensor:
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
+  
+  - platform: template
+    sensors:
+      next_bday:
+        value_template: >
+                        {% if states.calendar.contacts_birthdays.state %}
+                        {{  strptime(states.calendar.contacts_birthdays.attributes.start_time, "%Y-%m-%d %H:%M:%S").strftime("%d.%m.%y, %A") }}: {{ states.calendar.contacts_birthdays.attributes.description }}
+                        {% endif %} 
+      next_holiday:  
+        value_template: >
+                        {% if states.calendar.national_holidays.state %}
+                        {{  strptime(states.calendar.national_holidays.attributes.start_time, "%Y-%m-%d %H:%M:%S").strftime("%d.%m.%y, %A") }}: {{ states.calendar.national_holidays.attributes.message }}
+                        {% endif %}
+      next_event:
+        value_template: >
+                        {% if states.calendar.house_hold.state %}
+                        {{  strptime(states.calendar.house_hold.attributes.start_time, "%Y-%m-%d %H:%M:%S").strftime("%d.%m.%y, %A") }}: {{ states.calendar.house_hold.attributes.message }}
+                        {% endif %}
+
+        
+google:
+  client_id: !secret gclient_id
+  client_secret: !secret gclient_sec
+  track_new_calendar: false

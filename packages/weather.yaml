@@ -11,6 +11,7 @@ sensor:
       - hourly_summary
       - daily_summary
       - precip_probability
+      - precip_type
 
   - platform: template
     sensors:

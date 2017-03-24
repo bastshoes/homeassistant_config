@@ -1,3 +1,28 @@
+xiaomi_card:
+  name: Office
+  entities:
+    - binary_sensor.motion_sensor_158d00010b2444
+    - sensor.xiaomi_motion
+    - binary_sensor.door_window_sensor_158d0000f6cb6c
+    - sensor.xiaomi_door
+    - sensor.temperature_158d00011788b7
+    - sensor.humidity_158d00011788b7
+    - light.gateway_light_f0b4299a681d
+    - binary_sensor.switch_158d0000eef136
+
+calendar_card:
+  name: Calendar
+  entities:
+    - sensor.next_event
+    - sensor.next_bday
+    - sensor.next_holiday
+
+dt_card:
+  name: Date & Time
+  entities:
+    - sensor.date
+    - sensor.time
+
 outside_card:
   name: Outside
   entities:
@@ -9,6 +34,7 @@ outside_card:
     - sensor.pws_wind_kph
     - sensor.pws_pressure_mb
     - sensor.dark_sky_precip_probability
+    - sensor.dark_sky_precip
     - sensor.dsn24h
     - sensor.dsn7d
 
@@ -16,7 +42,10 @@ default_view:
   view: yes
   entities:
     - device_tracker.bastshoes_meizupro5
+    - group.dt_card
+    - group.calendar_card
     - group.outside_card
+    - group.xiaomi_card
 
 andrey_card:
   name: Andrey

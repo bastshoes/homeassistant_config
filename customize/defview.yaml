@@ -1,0 +1,17 @@
+group.xiaomi_card:
+  order: 4
+group.outside_card:
+  order: 3
+group.dt_card:
+  order: 1
+group.calendar_card:
+  order: 2
+sensor.next_bday:
+  friendly_name: Next birthday
+  icon: mdi:cake
+sensor.next_event:
+  friendly_name: Next event
+  icon: mdi:calendar-check
+sensor.next_holiday:
+  friendly_name: Holiday
+  icon: mdi:glass-tulip

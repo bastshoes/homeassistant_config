@@ -51,7 +51,17 @@ conversation:
 recorder: 
   db_url: !secret sql_string
   purge_days: 10
-
+  exclude:
+    domains:
+      - calendar
+      - updater
+    entities:
+      - sun.sun
+      - sensor.date
+      - sensor.time
+      - camera.andrey_location
+      - sensor.meizu_battery
+  
 # Enables support for tracking state changes over time.
 history:
 
@@ -77,8 +87,33 @@ device_tracker: !include_dir_merge_list device_tracker
 # Zones
 zone: !include_dir_merge_list zones
 
-#Groups
+# Proximity
+proximity: !include zones/proximity.yaml
+# Groups
 group: !include groups.yaml
+
+# Notifications
+notify:
+  - name: pushbullet
+    platform: pushbullet
+    api_key: !secret pushbullet_key
+
+# Xiaomi
+xiaomi:
+  check_ghost: True
+  gateways:
+    - sid: !secret xiaomi_sid
+      key: !secret xiaomi_key
+
+# Logger
+logger:
+  default: warn
+  logs:
+    custom_components.xiaomi: debug
+    custom_components.sensor.xiaomi: debug
+    custom_components.binary_sensor.xiaomi: debug
+    custom_components.light.xiaomi: debug
+    custom_components.switch.xiaomi: debug
 
 # Text to speech
 # tts:

@@ -1,0 +1,15 @@
+#sensor.xiaomi_door:
+#  friendly_name: Door sensor
+#  icon: mdi:glassdoor
+#sensor.xiaomi_motion:
+#  friendly_name: Motion sensor
+#  icon: mdi:run
+binary_sensor.switch_158d0000eef136:
+  friendly_name: Switch
+light.gateway_light_f0b4299a681d:
+  friendly_name: Gateway light
+sensor.humidity_158d00011788b7:
+  friendly_name: Humidity
+  icon: mdi:water-percent
+sensor.temperature_158d00011788b7:
+  friendly_name: Temperature

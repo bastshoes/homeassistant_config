@@ -1,0 +1,15 @@
+sensor:
+  - platform: template 
+    sensors:
+      xiaomi_motion:
+        value_template: >-
+                        {% if is_state('binary_sensor.motion_sensor_158d00010b2444', 'off') %}No motion{% else %}Motion{% endif %}
+        friendly_name: Motion sensor
+        icon_template: >
+                       {% if is_state('binary_sensor.motion_sensor_158d00010b2444', 'off') %}mdi:human-handsdown{% else %}mdi:run-fast{% endif %}
+      xiaomi_door:
+        value_template: >
+                        {% if is_state('binary_sensor.door_window_sensor_158d0000f6cb6c', 'on') %}opened{% else %}closed{% endif %}
+        friendly_name: Door sensor
+        icon_template: >
+                       {% if is_state('binary_sensor.door_window_sensor_158d0000f6cb6c', 'on') %}mdi:window-open{% else %}mdi:window-closed{% endif %}

@@ -3,3 +3,21 @@
   longitude: !secret home_long
   radius: 30
   icon: mdi:home
+
+- name: Work
+  latitude: !secret work_lat
+  longitude: !secret work_long
+  radius: 60
+  icon: mdi:worker
+
+- name: Parking 2
+  latitude: !secret park2_lat
+  longitude: !secret park2_long
+  radius: 50
+  icon: mdi:car
+
+- name: Parking 1
+  latitude: !secret park1_lat
+  longitude: !secret park1_long
+  radius: 85
+  icon: mdi:car 

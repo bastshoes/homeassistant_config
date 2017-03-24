@@ -10,6 +10,10 @@ sensor.dark_sky_precip_probability:
   friendly_name: Precip Probability
   icon: mdi:weather-snowy-rainy
 
+sensor.dark_sky_precip:
+  friendly_name: Precip type
+  
+
 sensor.pws_station_id:
   friendly_name: PWS Station ID
   icon: mdi:fingerprint
@@ -77,6 +81,3 @@ group.darksky_card:
   order: 2
 group.wunderground_card:
   order: 1
-group.outside_card:
-  order: 2
-
