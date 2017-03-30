@@ -61,6 +61,14 @@ recorder:
       - sensor.time
       - camera.andrey_location
       - sensor.meizu_battery
+      - input_select.andrey_status
+      - sensor.cpu_use
+      - sensor.disk_free_home
+      - sensor.ha_version
+      - sensor.ram_free
+      - sensor.ram_use
+      - sensor.since_last_boot
+      - sensor.since_last_boot_templated
   
 # Enables support for tracking state changes over time.
 history:
@@ -115,6 +123,11 @@ logger:
     custom_components.light.xiaomi: debug
     custom_components.switch.xiaomi: debug
 
+# Scripts
+script: !include_dir_merge_named scripts/
+
+# Automations
+automation: !include_dir_merge_list automation/
 # Text to speech
 # tts:
 #  platform: google

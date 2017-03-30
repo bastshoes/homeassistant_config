@@ -1,0 +1,13 @@
+sensor.disk_free_home:
+  friendly_name: Free disk space
+sensor.ram_free:
+  icon: mdi:chip
+sensor.ram_use:
+  icon: mdi:chip
+  friendly_name: RAM Used
+sensor.cpu_use:
+  friendly_name: CPU usage
+  icon: mdi:select-inverse
+sensor.ha_version:
+  icon: mdi:book-variant
+

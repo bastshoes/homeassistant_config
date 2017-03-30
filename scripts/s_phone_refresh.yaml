@@ -1,0 +1,6 @@
+refresh_phone:
+  sequence:
+    - service: mqtt.publish
+      data:
+        topic: "owntracks/bastshoes/MeizuPro5/cmd"
+        payload_template: '{"_type":"cmd","action":"reportLocation"}'

@@ -1,9 +1,9 @@
 xiaomi_card:
   name: Office
   entities:
-    - binary_sensor.motion_sensor_158d00010b2444
+#    - binary_sensor.motion_sensor_158d00010b2444
     - sensor.xiaomi_motion
-    - binary_sensor.door_window_sensor_158d0000f6cb6c
+#    - binary_sensor.door_window_sensor_158d0000f6cb6c
     - sensor.xiaomi_door
     - sensor.temperature_158d00011788b7
     - sensor.humidity_158d00011788b7
@@ -32,7 +32,8 @@ outside_card:
     - sensor.pws_relative_humidity
     - sensor.pws_wind_dir
     - sensor.pws_wind_kph
-    - sensor.pws_pressure_mb
+    - sensor.mmhg
+#   - sensor.pws_pressure_mb
     - sensor.dark_sky_precip_probability
     - sensor.dark_sky_precip
     - sensor.dsn24h
@@ -52,6 +53,7 @@ andrey_card:
   entities:
     - device_tracker.bastshoes_meizupro5
     - sensor.meizu_battery
+    - input_select.andrey_status
 
 andrey_view:
   view: yes
@@ -82,7 +84,8 @@ wunderground_card:
     - sensor.pws_wind_kph
     - sensor.pws_wind_dir
     - sensor.pws_wind_gust_kph
-    - sensor.pws_pressure_mb
+    - sensor.mmhg
+#   - sensor.pws_pressure_mb
     - sensor.pws_pressure_trend
     - sensor.pws_visibility_km
     - sensor.pws_precip_1hr_metric
@@ -100,3 +103,39 @@ weather_view:
   entities:
     - group.wunderground_card
     - group.darksky_card
+
+sysmonitor_card:
+  name: System Monitor
+  entities:
+    - sensor.disk_free_home
+    - sensor.cpu_use
+    - sensor.ram_use
+    - sensor.ram_free
+    - sensor.since_last_boot_templated
+#    - sensor.ha_last_restart
+    - sensor.ha_version
+
+sysmonitor_view:
+  view: yes
+  name: System Monitor
+  icon: mdi:raspberrypi  
+  entities:
+    - group.sysmonitor_card
+
+automation_card:
+  name: Automations
+  entities: 
+    - automation.car_location
+
+script_card:
+  name: Scripts
+  entities:
+    - script.refresh_phone
+
+automation_view:
+  view: yes
+  name: Automation
+  icon: mdi:settings
+  entities:
+    - group.automation_card
+    - group.script_card

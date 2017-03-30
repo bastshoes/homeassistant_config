@@ -1,8 +1,8 @@
 home:
-  ignored_zones:
-    - work
-    - parking_1
-    - parking_2
+#  ignored_zones:
+#    - work
+#    - parking_1
+#    - parking_2
   devices:
     - device_tracker.bastshoes_meizupro5
   tolerance: 50

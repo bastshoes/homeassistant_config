@@ -10,3 +10,12 @@ camera:
     name: "Andrey location"
     still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.device_tracker.bastshoes_meizupro5.attributes.latitude }},{{ states.device_tracker.bastshoes_meizupro5.attributes.longitude }}&zoom=18&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:A%7C{{ states.device_tracker.bastshoes_meizupro5.attributes.latitude }},{{ states.device_tracker.bastshoes_meizupro5.attributes.longitude }}
     limit_refetch_to_url_change: true
+
+input_select:
+  andrey_status:
+    name: Andrey status
+    options:
+     - driving
+     - standby
+    initial: standby
+

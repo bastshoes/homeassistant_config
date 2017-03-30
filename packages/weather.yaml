@@ -27,7 +27,16 @@ sensor:
         value_template: >
                         {% if states.sensor.dark_sky_daily_summary.state %}
                         {{states('sensor.dark_sky_daily_summary')}}
-                        {% endif %}  
+                        {% endif %}
+
+      mmhg:
+        friendly_name: 'Baromitric pressure'
+        icon_template: 'mdi:gauge'
+        value_template: >
+                        {% if states.sensor.pws_pressure_mb.state %}
+                        {{ (states.sensor.pws_pressure_mb.state | float * 0.75006375541921) | round }}
+                        {% endif %}
+        unit_of_measurement: 'mmHg'   
 
 #########################################################################################
 #                               Weather Underground                                     #

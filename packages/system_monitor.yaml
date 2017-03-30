@@ -1,0 +1,65 @@
+sensor:
+  - platform: command_line
+    name: HA Version
+    command: "/srv/homeassistant/bin/hass --version"
+    scan_interval: 86400
+
+  - platform: systemmonitor
+    resources:
+      - type: disk_free
+        arg: /home
+      - type: memory_use_percent
+      - type: memory_free
+      - type: processor_use
+      - type: since_last_boot
+
+  - platform: template
+    sensors:
+#      ha_last_restart:
+#        value_template: '{{ as_timestamp(states.automation.startup_notification_and_shut_startup_lights.attributes.last_triggered) | timestamp_custom("%b %d %X") }}'
+#        friendly_name: HA Last Restart
+#        icon_template: mdi:timelapse
+
+      since_last_boot_templated:
+        icon_template: mdi:clock
+        friendly_name: 'Since last boot'
+        value_template: >-
+          {%- set slb = states.sensor.since_last_boot.state.split(' ') -%}
+          {%- set count = slb | length -%}
+          {%- set hms = slb[count - 1] -%}
+          {%- set hms_trimmed = hms.split('.')[0] -%}
+          {%- set hms_split = hms_trimmed.split(':') -%}
+          {%- set hours = hms_split[0] | int -%}
+          {%- set minutes = hms_split[1] | int -%}
+          {%- set seconds = hms_split[2] | int -%}
+          {%- if count == 3 -%}
+            {{ slb[0] ~ ' ' ~ slb[1] ~ ' ' }}
+          {%- endif -%}
+          {%- if hours > 0 -%}
+           {%- if hours == 1 -%}
+             1 hour
+           {%- else -%}
+            {{ hours }} hours
+          {%- endif -%}
+          {%- endif -%}
+          {%- if minutes > 0 -%}
+          {%- if hours > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes == 1 -%}
+            1 minute
+          {%- else -%}
+            {{ minutes }} minutes
+          {%- endif -%}
+          {%- endif -%}
+          {%- if seconds > 0 -%}
+          {%- if hours > 0 or minutes > 0 -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if seconds == 1 -%}
+            1 second
+          {%- else -%}
+            {{ seconds }} seconds
+          {%- endif -%}
+          {%- endif -%}
+

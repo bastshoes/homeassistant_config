@@ -53,9 +53,9 @@ sensor.pws_precip_1hr_metric:
 sensor.pws_precip_today_metric:
   friendly_name: Precip Today
   icon: mdi:water
-sensor.pws_pressure_mb:
-  friendly_name: Barometric Pressure
-  icon: mdi:nature
+#sensor.pws_pressure_mb:
+#  friendly_name: Barometric Pressure
+#  icon: mdi:nature
 sensor.pws_visibility_km:
   friendly_name: Visibility
   icon: mdi:weather-fog
