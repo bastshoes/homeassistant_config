@@ -93,7 +93,9 @@ recorder:
       - sensor.pws_uv
       - sensor.ha_current_version      
       - sensor.ha_installed_version
-
+      - sensor.pws_station_id
+      - sensor.pws_location
+      
 
 
 # Enables support for tracking state changes over time.
@@ -142,7 +144,9 @@ logbook:
       - sensor.pws_uv
       - sensor.ha_current_version
       - sensor.ha_installed_version
-      
+      - sensor.pws_location
+      - sensor.pws_station_id
+
 # Track the sun
 sun:
 
