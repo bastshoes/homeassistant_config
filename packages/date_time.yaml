@@ -1,0 +1,13 @@
+sensor:
+  - platform: template
+    sensors:
+      date_weekday:
+        value_template: "{{as_timestamp(now())|timestamp_custom('%A', True)}}"
+      date_mounth:
+        value_template: "{{as_timestamp(now())|timestamp_custom('%B', True)}}"
+      date_day:
+        value_template: "{{as_timestamp(now())|timestamp_custom('%d', True)}}"
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'      

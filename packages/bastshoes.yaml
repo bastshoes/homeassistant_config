@@ -5,6 +5,117 @@ sensor:
     unit_of_measurement: "%"
     value_template: "{{ value_json.batt }}"
 
+  - platform: template
+    sensors:
+      andrey_meizu_battery:
+        unit_of_measurement: '%'
+        entity_id: device_tracker.bastshoes_meizupro5
+        value_template: "{{ (states.device_tracker.bastshoes_meizupro5.attributes|default).battery|default|int('unknown') }}"
+        icon_template: >-             
+             {% set battery_level = states('sensor.meizu_battery')|int('unknown') %}
+             {% set battery_round = (battery_level|int / 10)|int * 10 %}
+             {% if battery_round >= 100 %}
+                mdi:battery
+             {% elif battery_round > 0 %}
+                mdi:battery-{{ battery_round }}
+             {% else %}
+                mdi:battery-alert
+             {% endif %}
+
+  - platform: google_travel_time
+    name: g_mornig_commute
+    api_key: !secret gmap_api
+    origin: device_tracker.bastshoes_meizupro5
+    destination: !secret work_placeid
+    options:
+      mode: driving
+      language: ru
+ 
+  - platform: google_travel_time
+    name: g_to_car_commute
+    api_key: !secret gmap_api
+    origin: device_tracker.bastshoes_meizupro5
+    destination: device_tracker.bastshoes_kyron 
+    options:
+      language: ru
+      mode: transit
+ 
+  - platform: google_travel_time
+    name: g_to_home_commute
+    api_key: !secret gmap_api
+    origin: device_tracker.bastshoes_kyron
+    destination: !secret home_placeid
+    options:
+      language: ru
+      mode: driving
+
+  - platform: template
+    sensors:
+      work_commute:
+        entity_id: 
+          - sensor.g_mornig_commute
+          - device_tracker.bastshoes_meizupro5
+          - sensor.date_weekday
+          - calendar.national_holidays
+        friendly_name: 'Work commute'
+        icon_template: 'mdi:car'
+        value_template: >-
+             {% if states.sensor.g_mornig_commute and
+                  not is_state('device_tracker.bastshoes_meizupro5', 'Work') and
+                  states('sensor.date_weekday') in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] and
+                  is_state('calendar.national_holidays', 'off') %}
+               {{ states.sensor.g_mornig_commute.attributes.duration_in_traffic }}
+             {% else %}
+               --
+             {% endif %}      
+
+      home_commute:
+        entity_id:
+          - sensor.g_to_car_commute
+          - sensor.g_to_home_commute
+        friendly_name: 'Home communte'
+        icon_template: 'mdi:home-map-marker'
+        value_template: >-
+                        {%- if states.sensor.g_to_car_commute and states.g_to_home_commute -%}
+                               {%- if not is_state('device_trakcer.bastshoes_kyron','home') and
+                                      not is_state('device_tracker.bastshoes_meizupro5','home') and
+                                      is_state('input_select.andrey_status','standby') -%}
+
+                                   {%- set total = (states('sensor.g_to_car_commute')| float +
+                                   states('sensor.g_to_home_commute') | float) | int('unknown') -%}
+                                   {%- set hours = total//60 -%}
+                                   {%- set minutes = total%60 -%}
+                                   {%- if minutes == 0 -%}
+                                      {{ hours }} час.
+                                   {%- endif -%}
+                                   {%- if hours == 0 -%}
+                                      {{ minutes }} мин.
+                                   {%- elif minutes > 0 and hours >0 -%}
+                                      {{ hours }} час. {{ minutes }} мин.
+                                   {%- endif -%}
+                               {% endif %}     
+
+                               {%- if not is_state('device_trakcer.bastshoes_kyron','home') and
+                                      not is_state('device_tracker.bastshoes_meizupro5','home') and
+                                      is_state('input_select.andrey_status', 'driving') -%}
+                                   {{ states('sensor.g_to_home_commute') }}
+                               {%- endif -%} 
+          
+                               {%- if is_state('device_tracker.bastshoes_kyron','home') and
+                                      is_state('device_tracker.bastshoes_meizupro5','home') -%}
+                                   --
+                               {%- endif -%}
+
+                               {%- if is_state('device_tracker.bastshoes_kyron','home') and
+                                      not is_state('device_tracker.bastshoes_meizupro5','home') and
+                                      is_state('input_select.andrey_status', 'standby') -%}
+                                   {{ states('sensor.g_to_car_commute') }}
+                               {%- endif -%}
+                        
+                        {%- else -%}
+                           --
+                        {%- endif -%}
+
 camera:
   - platform: generic
     name: "Andrey location"

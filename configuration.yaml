@@ -50,7 +50,7 @@ conversation:
 # Recorder to store in MySQL
 recorder: 
   db_url: !secret sql_string
-  purge_days: 10
+  purge_days: 2
   exclude:
     domains:
       - calendar
@@ -69,13 +69,80 @@ recorder:
       - sensor.ram_use
       - sensor.since_last_boot
       - sensor.since_last_boot_templated
-  
+      - sensor.to_car_commute
+      - sensor.to_home_commute
+      - sensor.mornig_commute
+      - proximity.home
+      - sensor.pws_observation_time
+      - sensor.pws_pressure_trend
+      - sensor.dsn24h
+      - sensor.dark_sky_hourly_summary
+      - sensor.ha_uptime
+      - sensor.pws_wind_dir
+      - sensor.home_commute
+      - sensor.dark_sky_daily_summary
+      - sensor.pws_solarradiation
+      - sensor.pws_precip_1hr_metric
+      - sensor.pws_precip_today_metric
+      - sensor.work_commute
+      - sensor.pws_weather
+      - sensor.date_weekday
+      - sensor.date_day
+      - sensor.dsn7d
+      - sensor.dark_sky_precip
+      - sensor.pws_uv
+      - sensor.ha_current_version      
+      - sensor.ha_installed_version
+
+
+
 # Enables support for tracking state changes over time.
 history:
 
 # View all events in a logbook
 logbook:
-
+  exclude:  
+    domains:
+      - calendar
+      - updater
+    entities:
+      - sun.sun
+      - sensor.date
+      - sensor.time
+      - camera.andrey_location
+      - sensor.meizu_battery
+      - input_select.andrey_status
+      - sensor.cpu_use
+      - sensor.disk_free_home
+      - sensor.ha_version
+      - sensor.ram_free
+      - sensor.ram_use
+      - sensor.since_last_boot
+      - sensor.since_last_boot_templated
+      - sensor.to_car_commute
+      - sensor.to_home_commute
+      - sensor.mornig_commute
+      - proximity.home
+      - sensor.pws_pressure_trend
+      - sensor.dsn24h
+      - sensor.dark_sky_hourly_summary
+      - sensor.ha_uptime
+      - sensor.pws_wind_dir
+      - sensor.home_commute
+      - sensor.dark_sky_daily_summary
+      - sensor.pws_solarradiation
+      - sensor.pws_precip_1hr_metric
+      - sensor.pws_precip_today_metric
+      - sensor.work_commute
+      - sensor.pws_weather
+      - sensor.date_weekday
+      - sensor.date_day
+      - sensor.dsn7d
+      - sensor.dark_sky_precip
+      - sensor.pws_uv
+      - sensor.ha_current_version
+      - sensor.ha_installed_version
+      
 # Track the sun
 sun:
 
@@ -122,13 +189,29 @@ logger:
     custom_components.binary_sensor.xiaomi: debug
     custom_components.light.xiaomi: debug
     custom_components.switch.xiaomi: debug
+#    components.light.osramlightify: debug
+    homeassistant.components.light.osramlightify: debug
 
 # Scripts
 script: !include_dir_merge_named scripts/
 
 # Automations
 automation: !include_dir_merge_list automation/
+
+# Lights
+light: !include_dir_merge_list light/
+
+
+#Media player
+media_player:
+  - platform: vlc
+
 # Text to speech
-# tts:
-#  platform: google
+tts:
+  - platform: yandextts
+    api_key: '8955f891-93e5-4ce7-8168-b9fd9d9de40e'
+    language: 'ru-RU'
+    codec: mp3
+    voice: oksana
+    speed: 2
 

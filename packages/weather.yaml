@@ -12,6 +12,7 @@ sensor:
       - daily_summary
       - precip_probability
       - precip_type
+      - cloud_cover
 
   - platform: template
     sensors:

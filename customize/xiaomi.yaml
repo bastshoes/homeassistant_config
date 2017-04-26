@@ -13,3 +13,6 @@ sensor.humidity_158d00011788b7:
   icon: mdi:water-percent
 sensor.temperature_158d00011788b7:
   friendly_name: Temperature
+sensor.illumination_f0b4299a681d:
+  friendly_name: Gateway illumination
+  icon: mdi:brightness-7

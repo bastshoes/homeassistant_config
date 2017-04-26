@@ -1,4 +1,4 @@
-refresh_phone:
+refresh_phone_location:
   sequence:
     - service: mqtt.publish
       data:

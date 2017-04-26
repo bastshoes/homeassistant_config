@@ -1,0 +1,19 @@
+- alias: driving_car_location
+  initial_state: True
+  trigger:
+    platform: time
+    minutes: '/05'
+    seconds: 00
+  condition:
+    condition: state
+    entity_id: input_select.andrey_status
+    state: driving
+  action:
+    - service: script.refresh_phone_location
+    - delay: 00:00:05
+    - service: mqtt.publish
+      data_template:
+        topic: "owntracks/bastshoes/kyron"
+        payload: '{"_type":"location", "tid":"ky", "lat":{{states.device_tracker.bastshoes_MeizuPro5.attributes.latitude}}, "lon":{{ states.device_tracker.bastshoes_MeizuPro5.attributes.longitude}},"tst":{{as_timestamp(now())}},"acc":{{states.device_tracker.bastshoes_MeizuPro5.attributes.gps_accuracy}}, "conn":"m", "t":"a"}'
+        qos: 2
+        retain: True   

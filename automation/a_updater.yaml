@@ -1,0 +1,11 @@
+  - alias: 'Update Available'
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: updater.updater
+    action:
+      service: notify.pushbullet
+      data:
+        message: "{{ states('updater.updater') }} update for Home Assistant is available."
+        title: 'HASS update'
+        target: "device/meizu"

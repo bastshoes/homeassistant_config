@@ -7,7 +7,9 @@ xiaomi_card:
     - sensor.xiaomi_door
     - sensor.temperature_158d00011788b7
     - sensor.humidity_158d00011788b7
+    - sensor.illumination_f0b4299a681d
     - light.gateway_light_f0b4299a681d
+    - light.kitchen
     - binary_sensor.switch_158d0000eef136
 
 calendar_card:
@@ -41,8 +43,10 @@ outside_card:
 
 default_view:
   view: yes
+  icon: mdi:home
   entities:
     - device_tracker.bastshoes_meizupro5
+    - device_tracker.bastshoes_kyron
     - group.dt_card
     - group.calendar_card
     - group.outside_card
@@ -52,14 +56,23 @@ andrey_card:
   name: Andrey
   entities:
     - device_tracker.bastshoes_meizupro5
-    - sensor.meizu_battery
+#    - sensor.meizu_battery
+    - sensor.andrey_meizu_battery
     - input_select.andrey_status
+    - device_tracker.bastshoes_kyron
+
+andrey_commute_card:
+  name: Commute
+  entities:
+    - sensor.work_commute
+    - sensor.home_commute
 
 andrey_view:
   view: yes
   name: Andrey
   icon: mdi:account
   entities:
+    - group.andrey_commute_card
     - group.andrey_card 
     - camera.andrey_location
 
@@ -77,6 +90,7 @@ wunderground_card:
     - sensor.pws_location
     - sensor.pws_elevation
     - sensor.pws_weather
+    - sensor.dark_sky_cloud_coverage
     - sensor.pws_temp_c
     - sensor.pws_feelslike_c
     - sensor.pws_dewpoint_c
@@ -108,12 +122,16 @@ sysmonitor_card:
   name: System Monitor
   entities:
     - sensor.disk_free_home
+    - sensor.cpu_speed
     - sensor.cpu_use
+    - sensor.cpu_temp
     - sensor.ram_use
     - sensor.ram_free
     - sensor.since_last_boot_templated
-#    - sensor.ha_last_restart
-    - sensor.ha_version
+    - sensor.external_ip
+    - sensor.ha_current_version
+    - sensor.ha_installed_version
+    - sensor.ha_uptime
 
 sysmonitor_view:
   view: yes
@@ -125,16 +143,18 @@ sysmonitor_view:
 automation_card:
   name: Automations
   entities: 
-    - automation.car_location
+    - automation.driving_car_location
+    - automation.finish_driving
+    - automation.update_available
 
 script_card:
   name: Scripts
   entities:
-    - script.refresh_phone
+    - script.refresh_phone_location
 
 automation_view:
   view: yes
-  name: Automation
+  name: Automations
   icon: mdi:settings
   entities:
     - group.automation_card

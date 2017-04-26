@@ -1,2 +1,4 @@
-automation.car_location:
-  friendly_name: Car location
+automation.driving_car_location:
+  friendly_name: Moving car location
+automation.finish_driving:
+  friendly_name: Finish driving

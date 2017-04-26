@@ -1,3 +1,3 @@
-sensor.meizu_battery:
-  icon: mdi:battery-70
+sensor.andrey_meizu_battery:
+  friendly_name: Meizu Battery
 

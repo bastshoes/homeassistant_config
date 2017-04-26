@@ -1,3 +1,7 @@
+sensor.dark_sky_cloud_coverage:
+  friendly_name: Cloud coverage
+  icon: mdi:weather-partlycloudy
+
 sensor.dsn7d:
   friendly_name: Next 7 days
   icon: mdi:calendar
