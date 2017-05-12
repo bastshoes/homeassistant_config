@@ -70,4 +70,11 @@ sensor:
       - wind_dir
       - wind_gust_kph
       - wind_kph
+#      - precip_1d_mm
+#      - precip_1d
+#      - temp_high_1d_c
+#      - temp_low_1d_c
+#      - weather_1d_metric
+#      - weather_1h
+       
             

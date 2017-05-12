@@ -1,0 +1,27 @@
+- alias: "Find RedmiNote On"
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_boolean.find_redminote
+    from: 'off'
+    to: 'on'
+  action:
+    - service: notify.zanzito
+      data:
+        message: ''
+        data: 
+          alarm: 'on'
+
+- alias: "Find RedmiNote Off"
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: input_boolean.find_redminote
+    from: 'on'
+    to: 'off'
+  action:
+    - service: notify.zanzito
+      data:
+        message: ''
+        data:
+          alarm: 'off'

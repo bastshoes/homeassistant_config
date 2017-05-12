@@ -1,5 +1,11 @@
 sensor:
   - platform: mqtt
+    state_topic: "zanzito/RedmiNote3/battery_level"
+    name: "RedmiNote3 Battery"
+    unit_of_measurement: "%"
+    qos: 0
+
+  - platform: mqtt
     state_topic: "owntracks/bastshoes/MeizuPro5"
     name: "Meizu Battery"
     unit_of_measurement: "%"
@@ -7,19 +13,44 @@ sensor:
 
   - platform: template
     sensors:
+      andrey_redminote3_battery:
+        friendly_name: 'RedmiNote3 Battery'
+        unit_of_measurement: '%'
+        entity_id: device_tracker.bastshoes_redminote3
+        value_template: "{{ (states.device_tracker.bastshoes_redminote3.attributes | default).battery | default | int('unknown') }}"
+        icon_template: >-
+             {% set battery_level = states('sensor.redminote3_battery')|int('unknown') %}
+             {% set battery_round = (battery_level|int / 10)|int * 10 %}
+             {% if battery_level == 'unknown' %}
+                 mdi:battery-unknown
+             {% else %}
+                 {% if battery_round >= 100 %}
+                    mdi:battery
+                 {% elif battery_round > 0 %}
+                    mdi:battery-{{ battery_round }}
+                 {% else %}
+                    mdi:battery-alert
+                {% endif %}
+             {% endif %}
+
       andrey_meizu_battery:
+        friendly_name: 'Meizu Battery'
         unit_of_measurement: '%'
         entity_id: device_tracker.bastshoes_meizupro5
-        value_template: "{{ (states.device_tracker.bastshoes_meizupro5.attributes|default).battery|default|int('unknown') }}"
+        value_template: "{{ (states.device_tracker.bastshoes_meizupro5.attributes | default).battery | default | int('unknown') }}"
         icon_template: >-             
              {% set battery_level = states('sensor.meizu_battery')|int('unknown') %}
              {% set battery_round = (battery_level|int / 10)|int * 10 %}
-             {% if battery_round >= 100 %}
-                mdi:battery
-             {% elif battery_round > 0 %}
-                mdi:battery-{{ battery_round }}
+             {% if battery_level == 'unknown' %}
+                 mdi:battery-unknown
              {% else %}
-                mdi:battery-alert
+                 {% if battery_round >= 100 %}
+                    mdi:battery
+                 {% elif battery_round > 0 %}
+                    mdi:battery-{{ battery_round }}
+                 {% else %}
+                    mdi:battery-alert
+                 {% endif %}
              {% endif %}
 
   - platform: google_travel_time
@@ -130,3 +161,17 @@ input_select:
      - standby
     initial: standby
 
+
+binary_sensor:
+  - platform: mqtt
+    name: "RedmiNote3 status"
+    state_topic: "zanzito/RedmiNote3/status"
+    payload_on: "1"
+    payload_off: "0"
+    sensor_calss: connectivity
+
+input_boolean:
+  find_redminote:
+    name: "Find RedmiNote 3"
+    initial: off
+    icon: mdi:magnify

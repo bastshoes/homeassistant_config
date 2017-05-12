@@ -47,10 +47,12 @@ default_view:
   entities:
     - device_tracker.bastshoes_meizupro5
     - device_tracker.bastshoes_kyron
+    - device_tracker.bastshoes_redminote3
     - group.dt_card
     - group.calendar_card
     - group.outside_card
     - group.xiaomi_card
+    - media_player.vlc
 
 andrey_card:
   name: Andrey
@@ -60,6 +62,14 @@ andrey_card:
     - sensor.andrey_meizu_battery
     - input_select.andrey_status
     - device_tracker.bastshoes_kyron
+
+redminote_card:
+  name: "RedmiNote 3"
+  entities:
+    - device_tracker.bastshoes_redminote3
+    - sensor.andrey_redminote3_battery
+    - binary_sensor.redminote3_status
+    - input_boolean.find_redminote    
 
 andrey_commute_card:
   name: Commute
@@ -75,6 +85,7 @@ andrey_view:
     - group.andrey_commute_card
     - group.andrey_card 
     - camera.andrey_location
+    - group.redminote_card
 
 darksky_card:
   name: Forecast
@@ -146,6 +157,8 @@ automation_card:
     - automation.driving_car_location
     - automation.finish_driving
     - automation.update_available
+    - automation.find_redminote_on
+    - automation.find_redminote_off
 
 script_card:
   name: Scripts
