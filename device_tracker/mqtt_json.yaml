@@ -1,3 +1,3 @@
 - platform: mqtt_json
   devices:
-    bastshoes_redminote3: "zanzito/RedmiNote3/location"
+    bastshoes_redminote3: "zanzito/redminote3/location"

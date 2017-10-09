@@ -95,7 +95,20 @@ recorder:
       - sensor.ha_installed_version
       - sensor.pws_station_id
       - sensor.pws_location
-      
+      - sensor.pws_weather_1d_metric
+      - sensor.pws_weather_1h
+      - sensor.pws_weather_1n_metric
+      - sensor.pws_weather_2d_metric
+      - sensor.pws_weather_2h
+      - sensor.pws_weather_2n_metric
+      - sensor.pws_weather_3d_metric
+      - sensor.pws_weather_3n_metric
+      - sensor.pws_weather_4d_metric
+      - sensor.pws_weather_4h
+      - sensor.pws_weather_4n_metric
+      - sensor.pws_weather_6h
+      - sensor.pws_weather_8h
+      - sensor.pushbullet_title      
 
 
 # Enables support for tracking state changes over time.
@@ -146,6 +159,20 @@ logbook:
       - sensor.ha_installed_version
       - sensor.pws_location
       - sensor.pws_station_id
+      - sensor.pws_weather_1d_metric
+      - sensor.pws_weather_1h
+      - sensor.pws_weather_1n_metric
+      - sensor.pws_weather_2d_metric
+      - sensor.pws_weather_2h
+      - sensor.pws_weather_2n_metric
+      - sensor.pws_weather_3d_metric
+      - sensor.pws_weather_3n_metric
+      - sensor.pws_weather_4d_metric
+      - sensor.pws_weather_4h
+      - sensor.pws_weather_4n_metric
+      - sensor.pws_weather_6h
+      - sensor.pws_weather_8h
+      - sensor.pushbullet_title    
 
 # Track the sun
 sun:
@@ -176,25 +203,26 @@ notify:
   - name: pushbullet
     platform: pushbullet
     api_key: !secret pushbullet_key
+  - name: zanzito
+    platform: zanzito
+    device-name: redminote3
 
 # Xiaomi
-xiaomi:
-  check_ghost: True
+xiaomi_aqara:  
   gateways:
-    - sid: !secret xiaomi_sid
+    - mac: !secret xiaomi_mac
       key: !secret xiaomi_key
 
 # Logger
 logger:
   default: warn
   logs:
-    custom_components.xiaomi: debug
-    custom_components.sensor.xiaomi: debug
-    custom_components.binary_sensor.xiaomi: debug
-    custom_components.light.xiaomi: debug
-    custom_components.switch.xiaomi: debug
-#    components.light.osramlightify: debug
-    homeassistant.components.light.osramlightify: debug
+#    homeassistant.components.xiaomi_aqara: debug
+#    homeassistant.components.sensor.xiaomi: debug
+    homeassistant.components.binary_sensor.xiaomi_aqara: debug
+#    homeassistant.components.light.xiaomi: debug
+#    homeassistant.components.switch.xiaomi: debug
+#   homeassistant.components.light.osramlightify: debug
 
 # Scripts
 script: !include_dir_merge_named scripts/
@@ -213,9 +241,10 @@ media_player:
 # Text to speech
 tts:
   - platform: yandextts
-    api_key: '8955f891-93e5-4ce7-8168-b9fd9d9de40e'
+    api_key: !secret yandex_key
     language: 'ru-RU'
     codec: mp3
     voice: oksana
-    speed: 2
+    emotion: good
+    speed: 1.0
 

@@ -11,6 +11,7 @@ xiaomi_card:
     - light.gateway_light_f0b4299a681d
     - light.kitchen
     - binary_sensor.switch_158d0000eef136
+    - light.switch
 
 calendar_card:
   name: Calendar
@@ -36,10 +37,17 @@ outside_card:
     - sensor.pws_wind_kph
     - sensor.mmhg
 #   - sensor.pws_pressure_mb
-    - sensor.dark_sky_precip_probability
-    - sensor.dark_sky_precip
-    - sensor.dsn24h
-    - sensor.dsn7d
+#    - sensor.pws_weather_1d_metric
+#    - sensor.pws_weather_1n_metric
+    - sensor.pws_weather_1h
+    - sensor.pws_weather_2h
+    - sensor.pws_weather_4h
+    - sensor.pws_weather_6h
+    - sensor.pws_weather_8h
+#    - sensor.dark_sky_precip_probability
+#    - sensor.dark_sky_precip
+#    - sensor.dsn24h
+#    - sensor.dsn7d
 
 default_view:
   view: yes
@@ -69,6 +77,7 @@ redminote_card:
     - device_tracker.bastshoes_redminote3
     - sensor.andrey_redminote3_battery
     - binary_sensor.redminote3_status
+    - sensor.redminote3_indoor_location
     - input_boolean.find_redminote    
 
 andrey_commute_card:
@@ -87,12 +96,24 @@ andrey_view:
     - camera.andrey_location
     - group.redminote_card
 
-darksky_card:
-  name: Forecast
-  entities:
+# darksky_card:
+#  name: Forecast
+#  entities:
 #    - sensor.dark_sky_precip_probability
-    - sensor.dsn24h
-    - sensor.dsn7d
+#    - sensor.dsn24h
+#    - sensor.dsn7d
+
+dialy_forecast:
+  name: "Прогноз"
+  entities:
+    - sensor.pws_weather_1d_metric
+    - sensor.pws_weather_1n_metric
+    - sensor.pws_weather_2d_metric
+    - sensor.pws_weather_2n_metric
+    - sensor.pws_weather_3d_metric
+    - sensor.pws_weather_3n_metric
+    - sensor.pws_weather_4d_metric
+    - sensor.pws_weather_4n_metric
 
 wunderground_card:
   name: Weather
@@ -127,7 +148,8 @@ weather_view:
   icon: mdi:weather-snowy-rainy
   entities:
     - group.wunderground_card
-    - group.darksky_card
+    - group.dialy_forecast
+#    - group.darksky_card
 
 sysmonitor_card:
   name: System Monitor

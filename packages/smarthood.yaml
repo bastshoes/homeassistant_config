@@ -1,0 +1,110 @@
+homeassistant:
+  customize:
+    binary_sensor.smarthood_status:
+      friendly_name: "Status"
+      icon: mdi:check-circle
+    sensor.smarthood_temperature:
+      friendly_name: "Temperature"
+    sensor.smarthood_humidity:
+      friendly_name: "Humidity"
+      icon: mdi:water-percent
+    sensor.smarthood_illumination:
+      friendly_name: "Illumination"
+      icon: mdi:weather-sunny
+    light.undercabinet_light:
+      friendly_name: "Cabinet light"
+    light.fan_light:
+      friendly_name: "Hood light"
+    fan.smarthood_fan:
+      friendly_name: "Fan"
+
+binary_sensor:
+  - platform: mqtt
+    state_topic: "smarthood/status"
+    qos: 0
+    name: "smarthood status"
+    payload_on: "1"
+    payload_off: "0"
+    device_class: connectivity
+
+sensor:
+  - platform: mqtt
+    state_topic: "smarthood/temperature"
+    name: "smarthood temperature"
+    unit_of_measurement: '°C'
+    expire_after: 90
+
+  - platform: mqtt
+    state_topic: "smarthood/humidity"
+    name: "smarthood humidity"
+    unit_of_measurement: '%'
+    expire_after: 90
+
+  - platform: mqtt
+    state_topic: "smarthood/illumination"
+    name: "smarthood illumination"
+    unit_of_measurement: 'lx'
+    expire_after: 90
+
+light:
+  - platform: mqtt
+    command_topic: "smarthood/cablight/set"
+    state_topic: "smarthood/cablight"
+    payload_off: "0"
+    payload_on: "1"
+    name: "undercabinet light"
+
+  - platform: mqtt
+    command_topic: "smarthood/fanlight/set"
+    state_topic: "smarthood/fanlight"
+    payload_off: "0"
+    payload_on: "1"
+    name: "fan light"
+
+fan:
+  - platform: mqtt
+    name: "smarthood fan"
+    state_topic: "smarthood/fan"
+    command_topic: "smarthood/fan/set"
+    payload_on: "1"
+    payload_off: "0"
+    speed_state_topic: "smarthood/fan/speed"
+    speed_command_topic: "smarthood/fan/speed/set"
+    payload_low_speed: "1"
+    payload_medium_speed: "2"
+    payload_high_speed: "3"
+    speeds:
+      - low
+      - medium
+      - high
+    retain: true
+    qos: 0
+
+group:
+  kitchen_climate_card:
+    name: "Kitchen climate"
+    entities:
+      - binary_sensor.smarthood_status
+      - sensor.smarthood_temperature
+      - sensor.smarthood_humidity
+      - sensor.smarthood_illumination
+
+  kitchen_light_card:
+    name: "Kitchen lights"
+    entities:
+      - light.undercabinet_light
+      - light.fan_light
+
+  kitchen_fan_card:
+    name: "Kitchen hood"
+    entities:
+      - fan.smarthood_fan
+
+  smart_hood_view:
+    view: yes
+    name: SmartHood
+    icon: mdi:rice
+    entities:
+      - group.kitchen_climate_card
+      - group.kitchen_light_card
+      - group.kitchen_fan_card

@@ -1,0 +1,3 @@
+sensor.redminote3_indoor_location:
+  friendly_name: "Indoor location"
+  icon: mdi:home-map-marker 

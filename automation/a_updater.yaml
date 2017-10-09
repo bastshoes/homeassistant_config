@@ -8,4 +8,4 @@
       data:
         message: "{{ states('updater.updater') }} update for Home Assistant is available."
         title: 'HASS update'
-        target: "device/meizu"
+        target: "device/Meizu"
